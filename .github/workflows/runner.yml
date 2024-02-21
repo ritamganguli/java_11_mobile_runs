@@ -26,7 +26,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'  # AdoptOpenJDK's new project name
 
-      - name: Run Desktop on Lambda Test
+      - name: Run Mobile on Lambda Test
         run: |
           ./gradlew clean runDesktopOnLambdaTest "-PuserName=shubhamr" "-PaccessKey=dl8Y8as59i1YyGZZUeLF897aCFvIDmaKkUU1e6RgBmlgMLIIhh" "-Pplatform=ios" -Pbrowser=Safari "-PbrowserVersion=16.0" -Presolution=2560x1440 "-PrunName=Serenity Local"
         shell: bash  # Ensures the use of Bash shell even on Windows
