@@ -8,7 +8,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 */3 * * *'  # Adjusted to run at minute 0 past every 3rd hour
+    - cron: '*/15 * * * *'  # Runs every 15 minutes
   workflow_dispatch:
 
 jobs:
@@ -30,5 +30,3 @@ jobs:
         run: |
           ./gradlew clean runDesktopOnLambdaTest "-PuserName=shubhamr" "-PaccessKey=dl8Y8as59i1YyGZZUeLF897aCFvIDmaKkUU1e6RgBmlgMLIIhh" "-Pplatform=ios" -Pbrowser=Safari "-PbrowserVersion=16.0" -Presolution=2560x1440 "-PrunName=Serenity Local"
         shell: bash  # Ensures the use of Bash shell even on Windows
-        env:
-          SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
