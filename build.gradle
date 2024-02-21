@@ -1,0 +1,108 @@
+defaultTasks 'clean', 'test', 'aggregate'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:4.0.15"
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+ext {
+    serenity_version = '4.0.15'
+    junit_platform_launcher_version="1.10.0"
+    cucumber_junit_platform_engine_version="7.14.0"
+    junit_platform_suite_version="1.10.0"
+    junit_jupiter_engine_version="5.9.3"
+    junit_vintage_engine_version="5.9.3"
+    logback_classic_version="1.2.10"
+    assertj_core_version="3.23.1"
+}
+
+dependencies {
+    dependencies {
+        testImplementation "net.serenity-bdd:serenity-core:${serenity_version}"
+        testImplementation "net.serenity-bdd:serenity-cucumber:${serenity_version}"
+        testImplementation "net.serenity-bdd:serenity-screenplay:${serenity_version}"
+        testImplementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenity_version}"
+        testImplementation "net.serenity-bdd:serenity-ensure:${serenity_version}"
+        testImplementation "org.junit.platform:junit-platform-launcher:${junit_platform_launcher_version}"
+        testImplementation "io.cucumber:cucumber-junit-platform-engine:${cucumber_junit_platform_engine_version}"
+        testImplementation "org.junit.platform:junit-platform-suite:${junit_platform_suite_version}"
+        testImplementation "org.junit.jupiter:junit-jupiter-engine:${junit_jupiter_engine_version}"
+        testImplementation "org.junit.vintage:junit-vintage-engine:${junit_vintage_engine_version}"
+        implementation "ch.qos.logback:logback-classic:${logback_classic_version}"
+        testImplementation "org.assertj:assertj-core:${assertj_core_version}"
+        testImplementation "org.apache.logging.log4j:log4j-slf4j-impl:2.20.0"
+        testImplementation "org.slf4j:slf4j-simple:2.0.9"
+    }
+}
+
+sourceSets.main.java.srcDirs = []
+
+//test {
+  //  useJUnitPlatform()
+//}
+
+task example1Web(type: Test) {
+    useJUnitPlatform()
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+	systemProperties['appUrl'] = "https://www.discover.com/online-banking"
+	include '**/BrowserLaunchRunner.class'
+	dependsOn('clean')
+}
+
+task runDesktopOnLambdaTest(type: Test) {
+    testClassesDirs = sourceSets.test.output.classesDirs
+	classpath = sourceSets.test.runtimeClasspath
+  	testLogging.showStandardStreams = true
+	systemProperties System.getProperties()
+	systemProperties['appUrl'] = project.hasProperty('appUrl')  ? appUrl : ''
+	systemProperties['lambdaTestCloud'] = 'true'
+	systemProperties['webdriver.capabilities.LT:Options.user'] = project.hasProperty('userName') ? userName : ''
+	systemProperties['webdriver.capabilities.LT:Options.accessKey'] = project.hasProperty('accessKey') ? accessKey : ''
+	systemProperties['webdriver.remote.url'] = project.hasProperty('userName') && project.hasProperty('accessKey') ? 'https://' + userName + ':' + accessKey + '@hub.lambdatest.com/wd/hub' : ''
+	systemProperties['webdriver.capabilities.LT:Options.platformName'] = 'ios'
+	systemProperties['webdriver.capabilities.browserName'] = 'Safari'
+    systemProperties['webdriver.capabilities.LT:Options.browserName'] = 'Safari'
+    // systemProperties['webdriver.capabilities.LT:Options.browserName'] = 'Safari'
+	systemProperties['webdriver.capabilities.LT:Options.os_version'] = project.hasProperty('browserVersion') ? browserVersion : 'latest'
+	//systemProperties['webdriver.capabilities.LT:Options.resolution'] = project.hasProperty('resolution') ? resolution : '1920x1080'
+    systemProperties['webdriver.capabilities.LT:Options.deviceName'] = 'iPhone 14 Pro Max'
+	systemProperties['webdriver.capabilities.LT:Options.visual'] = true
+    systemProperties['webdriver.capabilities.LT:Options.isRealMobile'] = false
+	systemProperties['webdriver.capabilities.LT:Options.video'] = true
+	systemProperties['webdriver.capabilities.LT:Options.dedicatedProxy'] = false
+	systemProperties['webdriver.capabilities.LT:Options.network'] = true
+	systemProperties['webdriver.capabilities.LT:Options.idleTimeout'] = 600
+	systemProperties['webdriver.capabilities.LT:Options.queueTimeout'] = 900
+	systemProperties['webdriver.capabilities.LT:Options.build'] = 'Serenity Desktop JDK11 build'
+	systemProperties['webdriver.capabilities.LT:Options.name'] = project.hasProperty('runName') ? runName : 'Serenity Desktop test'
+	systemProperties['webdriver.capabilities.LT:Options.project'] = 'Serenity sample'
+    systemProperties['webdriver.capabilities.LT:Options.usePrebuiltWDA'] = true
+	systemProperties['webdriver.capabilities.LT:Options.useNewWDA'] = true
+    systemProperties['webdriver.capabilities.LT:Options.w3c'] = true
+	include '**/BrowserLaunchRunner.class'
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
