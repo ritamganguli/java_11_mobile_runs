@@ -57,9 +57,11 @@ dependencies {
 
 sourceSets.main.java.srcDirs = []
 
-//test {
-  //  useJUnitPlatform()
-//}
+
+test {
+    systemProperty 'webdriver.timeouts.implicitlywait', '150000000'
+    systemProperty 'webdriver.wait.for.timeout', '30000000'
+}
 
 task example1Web(type: Test) {
     useJUnitPlatform()
