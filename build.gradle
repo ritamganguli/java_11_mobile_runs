@@ -101,6 +101,7 @@ task runDesktopOnLambdaTest(type: Test) {
 	systemProperties['webdriver.capabilities.LT:Options.project'] = 'Serenity sample'
     systemProperties['webdriver.capabilities.LT:Options.usePrebuiltWDA'] = true
 	systemProperties['webdriver.capabilities.LT:Options.useNewWDA'] = false
+	systemProperties['webdriver.capabilities.LT:Options.fixedIP'] = "10.64.81.136"
     systemProperties['webdriver.capabilities.LT:Options.w3c'] = true
 	include '**/BrowserLaunchRunner.class'
 }
