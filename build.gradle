@@ -99,7 +99,7 @@ task runDesktopOnLambdaTest(type: Test) {
 	systemProperties['webdriver.capabilities.LT:Options.build'] = 'Serenity Desktop JDK11 build'
 	systemProperties['webdriver.capabilities.LT:Options.name'] = project.hasProperty('runName') ? runName : 'Serenity Desktop test'
 	systemProperties['webdriver.capabilities.LT:Options.project'] = 'Serenity sample'
-    systemProperties['webdriver.capabilities.LT:Options.usePrebuiltWDA'] = true
+    systemProperties['webdriver.capabilities.LT:Options.usePrebuiltWDA'] = false
 	systemProperties['webdriver.capabilities.LT:Options.useNewWDA'] = true
     systemProperties['webdriver.capabilities.LT:Options.w3c'] = true
 	include '**/BrowserLaunchRunner.class'
