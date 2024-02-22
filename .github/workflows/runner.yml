@@ -28,5 +28,5 @@ jobs:
 
       - name: Run Mobile on Lambda Test
         run: |
-          ./gradlew clean runDesktopOnLambdaTest "-PuserName=shubhamr" "-PaccessKey=dl8Y8as59i1YyGZZUeLF897aCFvIDmaKkUU1e6RgBmlgMLIIhh" "-Pplatform=ios" -Pbrowser=Safari "-PbrowserVersion=16.0" -Presolution=2560x1440 "-PrunName=Serenity Local"
+          ./gradlew clean runDesktopOnLambdaTest "-PuserName=shubhamr" "-PaccessKey=dl8Y8as59i1YyGZZUeLF897aCFvIDmaKkUU1e6RgBmlgMLIIhh" "-Pplatform=ios" -Pbrowser=Safari "-PbrowserVersion=16.0" -Presolution=2560x1440 "-PrunName=Serenity Local" -Dwebdriver.timeouts.implicitlywait=15000 -Dwebdriver.wait.for.timeout=30000
         shell: bash  # Ensures the use of Bash shell even on Windows
