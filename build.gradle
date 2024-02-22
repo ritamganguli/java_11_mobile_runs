@@ -99,9 +99,11 @@ task runDesktopOnLambdaTest(type: Test) {
 	systemProperties['webdriver.capabilities.LT:Options.build'] = 'Serenity Desktop JDK11 build'
 	systemProperties['webdriver.capabilities.LT:Options.name'] = project.hasProperty('runName') ? runName : 'Serenity Desktop test'
 	systemProperties['webdriver.capabilities.LT:Options.project'] = 'Serenity sample'
-    systemProperties['webdriver.capabilities.LT:Options.usePrebuiltWDA'] = true
-	systemProperties['webdriver.capabilities.LT:Options.useNewWDA'] = false
-	systemProperties['webdriver.capabilities.LT:Options.fixedIP'] = "10.64.81.80"
+ //    systemProperties['webdriver.capabilities.LT:Options.usePrebuiltWDA'] = true
+	// systemProperties['webdriver.capabilities.LT:Options.useNewWDA'] = false
+	    systemProperties['webdriver.capabilities.LT:Options.usePrebuiltWDA'] = true
+	systemProperties['webdriver.capabilities.LT:Options.useNewWDA'] = true
+	systemProperties['webdriver.capabilities.LT:Options.fixedIP'] = "10.64.80.161"
     systemProperties['webdriver.capabilities.LT:Options.w3c'] = true
 	include '**/BrowserLaunchRunner.class'
 }
