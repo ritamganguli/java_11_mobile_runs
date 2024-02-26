@@ -57,11 +57,9 @@ dependencies {
 
 sourceSets.main.java.srcDirs = []
 
-
-test {
-    systemProperty 'webdriver.timeouts.implicitlywait', '150000000'
-    systemProperty 'webdriver.wait.for.timeout', '30000000'
-}
+//test {
+  //  useJUnitPlatform()
+//}
 
 task example1Web(type: Test) {
     useJUnitPlatform()
@@ -81,16 +79,16 @@ task runDesktopOnLambdaTest(type: Test) {
 	systemProperties['lambdaTestCloud'] = 'true'
 	systemProperties['webdriver.capabilities.LT:Options.user'] = project.hasProperty('userName') ? userName : ''
 	systemProperties['webdriver.capabilities.LT:Options.accessKey'] = project.hasProperty('accessKey') ? accessKey : ''
-	systemProperties['webdriver.remote.url'] = project.hasProperty('userName') && project.hasProperty('accessKey') ? 'https://' + userName + ':' + accessKey + '@hub.mobile-hub-akshat44-dev.lambdatestinternal.com/wd/hub' : ''
+	systemProperties['webdriver.remote.url'] = project.hasProperty('userName') && project.hasProperty('accessKey') ? 'https://' + userName + ':' + accessKey + '@hub.lambdatest.com/wd/hub' : ''
 	systemProperties['webdriver.capabilities.LT:Options.platformName'] = 'ios'
 	systemProperties['webdriver.capabilities.browserName'] = 'Safari'
     systemProperties['webdriver.capabilities.LT:Options.browserName'] = 'Safari'
     // systemProperties['webdriver.capabilities.LT:Options.browserName'] = 'Safari'
 	systemProperties['webdriver.capabilities.LT:Options.os_version'] = project.hasProperty('browserVersion') ? browserVersion : 'latest'
 	//systemProperties['webdriver.capabilities.LT:Options.resolution'] = project.hasProperty('resolution') ? resolution : '1920x1080'
-    systemProperties['webdriver.capabilities.LT:Options.deviceName'] = 'iPhone 11'
+    systemProperties['webdriver.capabilities.LT:Options.deviceName'] = 'iPhone 14 Pro Max'
 	systemProperties['webdriver.capabilities.LT:Options.visual'] = true
-    systemProperties['webdriver.capabilities.LT:Options.isRealMobile'] = true
+    systemProperties['webdriver.capabilities.LT:Options.isRealMobile'] = false
 	systemProperties['webdriver.capabilities.LT:Options.video'] = true
 	systemProperties['webdriver.capabilities.LT:Options.dedicatedProxy'] = false
 	systemProperties['webdriver.capabilities.LT:Options.network'] = true
@@ -100,7 +98,7 @@ task runDesktopOnLambdaTest(type: Test) {
 	systemProperties['webdriver.capabilities.LT:Options.name'] = project.hasProperty('runName') ? runName : 'Serenity Desktop test'
 	systemProperties['webdriver.capabilities.LT:Options.project'] = 'Serenity sample'
     systemProperties['webdriver.capabilities.LT:Options.usePrebuiltWDA'] = true
-	systemProperties['webdriver.capabilities.LT:Options.useNewWDA'] = false
+	systemProperties['webdriver.capabilities.LT:Options.useNewWDA'] = true
     systemProperties['webdriver.capabilities.LT:Options.w3c'] = true
 	include '**/BrowserLaunchRunner.class'
 }
