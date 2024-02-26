@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        number: [1]
+        number: [1,2,3,4,5]
 
     steps:
       - name: Checkout code
