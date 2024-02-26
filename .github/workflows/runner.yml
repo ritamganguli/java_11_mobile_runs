@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        number: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        number: [1]
 
     steps:
       - name: Checkout code
@@ -33,5 +33,5 @@ jobs:
 
       - name: Run Mobile on Lambda Test
         run: |
-          ./gradlew clean runDesktopOnLambdaTest "-PuserName=shubhamr" "-PaccessKey=dl8Y8as59i1YyGZZUeLF897aCFvIDmaKkUU1e6RgBmlgMLIIhh" "-Pplatform=ios" -Pbrowser=Safari "-PbrowserVersion=16.0" -Presolution=2560x1440 "-PrunName=Serenity Local" -Dwebdriver.timeouts.implicitlywait=1500000 -Dwebdriver.wait.for.timeout=3000000
+          ./gradlew clean runDesktopOnLambdaTest "-PuserName=sireesha" "-PaccessKey=XkdYEUYLgxvbhpJuSesSt2OVfe8pa0tTuAhvOrLhfAC8HcpBMF" "-Pplatform=ios" -Pbrowser=Safari "-PbrowserVersion=16.0" -Presolution=2560x1440 "-PrunName=Serenity Local" -Dwebdriver.timeouts.implicitlywait=1500000 -Dwebdriver.wait.for.timeout=3000000
         shell: bash  # Ensures the use of Bash shell even on Windows
