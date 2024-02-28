@@ -96,7 +96,7 @@ task runDesktopOnLambdaTest(type: Test) {
 	systemProperties['webdriver.capabilities.LT:Options.network'] = true
 	systemProperties['webdriver.capabilities.LT:Options.idleTimeout'] = 600
 	systemProperties['webdriver.capabilities.LT:Options.queueTimeout'] = 900
-	systemProperties['webdriver.capabilities.LT:Options.build'] = 'Serenity Desktop JDK11 build Mobile Runs'
+	systemProperties['webdriver.capabilities.LT:Options.build'] = 'Ritam-Serenity Desktop JDK11 build Mobile Runs'
 	systemProperties['webdriver.capabilities.LT:Options.name'] = project.hasProperty('runName') ? runName : 'Serenity'
 	systemProperties['webdriver.capabilities.LT:Options.project'] = 'Serenity sample'
     systemProperties['webdriver.capabilities.LT:Options.usePrebuiltWDA'] = true
