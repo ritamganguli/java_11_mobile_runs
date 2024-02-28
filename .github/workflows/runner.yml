@@ -1,37 +1,37 @@
-name: Run Desktop on Lambda Test
+# name: Run Desktop on Lambda Test
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-  schedule:
-    - cron: '*/9 * * * *'  # Runs every 15 minutes
-  workflow_dispatch:
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
+#   schedule:
+#     - cron: '*/9 * * * *'  # Runs every 15 minutes
+#   workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: windows-latest  # Specifies the Windows runner
+# jobs:
+#   build:
+#     runs-on: windows-latest  # Specifies the Windows runner
 
-    strategy:
-      matrix:
-        number: [1,2,3,4,5]
+#     strategy:
+#       matrix:
+#         number: [1,2,3,4,5]
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          ref: main  # Specifies the branch to check out
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+#         with:
+#           ref: main  # Specifies the branch to check out
 
-      - name: Set up JDK 11  # Sets up Java 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'  # AdoptOpenJDK's new project name
+#       - name: Set up JDK 11  # Sets up Java 11
+#         uses: actions/setup-java@v3
+#         with:
+#           java-version: '11'
+#           distribution: 'temurin'  # AdoptOpenJDK's new project name
 
-      - name: Run Mobile on Lambda Test
-        run: |
-          ./gradlew clean runDesktopOnLambdaTest "-PuserName=shubhamr" "-PaccessKey=dl8Y8as59i1YyGZZUeLF897aCFvIDmaKkUU1e6RgBmlgMLIIhh" "-Pplatform=ios" -Pbrowser=Safari "-PbrowserVersion=16.0" -Presolution=2560x1440 "-PrunName=Serenity Local"
-        shell: bash  # Ensures the use of Bash shell even on Windows
+#       - name: Run Mobile on Lambda Test
+#         run: |
+#           ./gradlew clean runDesktopOnLambdaTest "-PuserName=shubhamr" "-PaccessKey=dl8Y8as59i1YyGZZUeLF897aCFvIDmaKkUU1e6RgBmlgMLIIhh" "-Pplatform=ios" -Pbrowser=Safari "-PbrowserVersion=16.0" -Presolution=2560x1440 "-PrunName=Serenity Local"
+#         shell: bash  # Ensures the use of Bash shell even on Windows
